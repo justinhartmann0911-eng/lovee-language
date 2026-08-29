@@ -133,7 +133,19 @@ h1.hide {
     height: 20px;
     display: block;
 }
+@media (max-width: 600px) {
 
+    #message {
+        margin-top: 10px;
+        font-size: 24px;
+        transform: translateY(-25px) scale(0.5);
+    }
+
+    #message.show {
+        transform: translateY(-25px) scale(1);
+    }
+
+}
 </style>
 </head>
 
