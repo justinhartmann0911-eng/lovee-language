@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>svenja</title>
+
+<style>
+    
+{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+}
+
+.app {
+    text-align: center;
+    width: 100%;
+}
+
+.teddy {
+    width: 300px;
+    max-width: 80vw;
+    border-radius: 25px;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+h1 {
+    color: #d6336c;
+    font-size: 32px;
+    margin: 10px 0 30px;
+    transition: opacity 0.5s ease;
+}
+
+/* "Für dich" verschwindet beim ersten Klick */
+h1.hide {
+    opacity: 0;
+}
+
+.heart {
+    border: none;
+    background: transparent;
+    font-size: 120px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.heart img {
+    width: 120px;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease; 
+}
+
+.heart:active img {
+    transform: scale(1.5);
+}
+
+@keyframes heartpop {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.6);
+    }
+
+    55% {
+        transform: scale(1.25);
+    } 
+
+    75% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#message {
+    margin-top: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #d6336c;
+
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 0.5s;
+}
+
+#message.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@keyframes fly {
+    from {
+        top: 55%;
+        opacity: 1;
+        transform: translateX(0) scale(0.5);
+    }
+
+    to {
+        top: -20%;
+        opacity: 0;
+        transform: translateX(var(--moveX)) scale(1);
+    }
+}
+
+.floating-heart {
+    position: fixed;
+    left: 50%;
+    top: 55%;
+    width: 20px;
+    height: 20px;
+    animation: fly 4s linear forwards;
+}
+
+.floating-heart img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <img src="teddy_sonnenblume.png" class="teddy">
+
+    <h1 id="title">ich bin dein drück mich teddy, wenn justin wieder doof ist.</h1>
+
+    <button class="heart" onclick="love()">
+        <img src="herz.png" alt="Herz">
+    </button>
+
+    <div id="message">
+    </div>
+
+</div>
+
+<script>
+
+/*
+    BILDER + TEXTE
+
+    Hier kannst du deine eigenen Bilder
+    und Texte eintragen.
+*/
+
+const surprises = [
+
+    {
+        image: "teddy_sonnenblume.png",
+        text: "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
+    },
+
+    {
+        image: "teddy_herz.png",
+        text: "Justin denkt an dich.❤️"
+    },
+
+    {
+        image: "teddy_liebe.png",
+        text: "ich liebe diese blauen augen und die wundervolle doofe art❤️"
+    },
+
+    {
+        image: "teddy_kuss.png",
+        text: "Ich bin so froh, dass es dich gibt ❤️"
+    },
+
+    {
+        image: "teddy_blumen.png",
+        text: "du bist der trottel den ich braucheee💗"
+    },
+
+    {
+        image: "teddy_rot.png",
+        text: "Mit dir ist alles schöner 💞"
+    },
+
+    {
+        image: "teddy_herz2.png",
+        text: "Du bist mein safeplace ❤️"
+    },
+
+    {
+        image: "teddy_liebe2.png",
+        text: "ich will dich niemals verlieren💕"
+    }
+
+];
+
+
+let surpriseIndex = 0;
+
+
+function love() {
+
+    /*
+        "Für dich" beim ersten Klick ausblenden
+    */
+
+    document.getElementById("title")
+        .classList.add("hide");
+
+
+    /*
+        TEDDY-BILD ÄNDERN
+    */
+
+    document.querySelector(".teddy").src =
+        surprises[surpriseIndex].image;
+
+
+    /*
+        TEXT ÄNDERN
+    */
+
+    const message =
+        document.getElementById("message");
+
+    message.classList.remove("show");
+
+
+    setTimeout(() => {
+
+        message.innerHTML =
+            surprises[surpriseIndex].text;
+
+        message.classList.add("show");
+
+    }, 100);
+
+
+    /*
+        ZUM NÄCHSTEN BILD/TEXT
+    */
+
+    surpriseIndex++;
+
+    if (surpriseIndex >= surprises.length) {
+        surpriseIndex = 0;
+    }
+
+
+    /*
+        FLIEGENDE HERZEN
+    */
+
+    for (let i = 0; i < 12; i++) {
+
+        const heart =
+            document.createElement("div");
+
+        heart.className =
+            "floating-heart";
+
+
+        const img =
+            document.createElement("img");
+
+        img.src = "herz.png";
+
+        heart.appendChild(img);
+
+
+        heart.style.left =
+            (40 + Math.random() * 20) + "vw";
+
+        heart.style.top =
+            (45 + Math.random() * 20) + "vh";
+
+
+        heart.style.setProperty(
+            "--moveX",
+            (Math.random() * 700 - 350) + "px"
+        );
+
+
+        document.body.appendChild(heart);
+
+
+        setTimeout(() => {
+            heart.remove();
+        }, 2000);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
