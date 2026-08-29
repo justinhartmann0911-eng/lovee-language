@@ -7,8 +7,8 @@
 <title>svenja</title>
 
 <style>
-    
-{
+
+* {
     box-sizing: border-box;
 }
 
@@ -16,11 +16,18 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffd6e7, #fff0f6);
+
+    background: linear-gradient(
+        135deg,
+        #ffd6e7,
+        #fff0f6
+    );
 }
 
 .app {
@@ -31,43 +38,80 @@ body {
 .teddy {
     width: 300px;
     max-width: 80vw;
+
     border-radius: 25px;
+
     display: block;
+
     margin: 0 auto 20px;
 }
 
+
+/* Überschrift am Anfang */
+
 h1 {
     color: #d6336c;
+
     font-size: 32px;
+
     margin: 10px 0 30px;
-    transition: opacity 0.5s ease;
+
+    transition:
+        opacity 0.5s ease,
+        height 0.5s ease,
+        margin 0.5s ease;
 }
 
-/* "Für dich" verschwindet beim ersten Klick */
+
+/* Überschrift verschwindet beim ersten Klick */
+
 h1.hide {
     opacity: 0;
+
+    height: 0;
+
+    margin: 0;
+
+    overflow: hidden;
 }
+
+
+/* Klick-Herz */
 
 .heart {
     border: none;
+
     background: transparent;
+
     font-size: 120px;
+
     cursor: pointer;
+
     transition: transform 0.2s;
+
+    padding: 0;
 }
 
 .heart img {
     width: 120px;
+
     height: auto;
+
     display: block;
-    transition: transform 0.3s ease; 
+
+    transition:
+        transform 0.3s ease;
 }
 
 .heart:active img {
     transform: scale(1.5);
 }
 
+
+/* Herz-Pop Animation */
+
 @keyframes heartpop {
+
     0% {
         transform: scale(1);
     }
@@ -78,7 +122,7 @@ h1.hide {
 
     55% {
         transform: scale(1.25);
-    } 
+    }
 
     75% {
         transform: scale(1.5);
@@ -87,50 +131,91 @@ h1.hide {
     100% {
         transform: scale(1);
     }
+
 }
 
+
+/* Nachricht */
+
 #message {
+
     margin-top: 25px;
+
     font-size: 30px;
+
     font-weight: bold;
+
     color: #d6336c;
 
     opacity: 0;
+
     transform: scale(0.5);
+
     transition: 0.5s;
+
+    padding: 0 20px;
 }
 
 #message.show {
+
     opacity: 1;
+
     transform: scale(1);
 }
 
+
+/* Fliegende Herzen */
+
 @keyframes fly {
+
     from {
+
         top: 55%;
+
         opacity: 1;
-        transform: translateX(0) scale(0.5);
+
+        transform:
+            translateX(0)
+            scale(0.5);
     }
 
     to {
+
         top: -20%;
+
         opacity: 0;
-        transform: translateX(var(--moveX)) scale(1);
+
+        transform:
+            translateX(var(--moveX))
+            scale(1);
     }
+
 }
 
 .floating-heart {
+
     position: fixed;
+
     left: 50%;
+
     top: 55%;
+
     width: 20px;
+
     height: 20px;
-    animation: fly 4s linear forwards;
+
+    animation:
+        fly 4s linear forwards;
+
+    pointer-events: none;
 }
 
 .floating-heart img {
+
     width: 20px;
+
     height: 20px;
+
     display: block;
 }
 
@@ -141,98 +226,199 @@ h1.hide {
 
 @media (max-width: 600px) {
 
-    /* Gesamten Inhalt auf dem Handy nach oben */
     .app {
-        transform: translateY(-100px);
+
+        position: relative;
+
+        top: -80px;
     }
+
+
+    .teddy {
+
+        width: 260px;
+
+        margin-bottom: 15px;
+    }
+
+
+    h1 {
+
+        font-size: 25px;
+
+        margin:
+            10px 25px 25px;
+    }
+
 
     .heart {
-        transform: translateY(0);
+
+        margin: 0;
+
+        padding: 0;
     }
+
+
+    .heart img {
+
+        width: 100px;
+    }
+
 
     #message {
-        margin-top: 10px;
-        transform: scale(0.5);
-    }
 
-    #message.show {
-        transform: scale(1);
+        margin-top: 10px;
+
+        font-size: 24px;
+
+        padding:
+            0 20px;
     }
 
 }
 
+
+/* =========================================
+   BILDER + TEXTE
+   ========================================= */
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="app">
 
-    <img src="teddy_sonnenblume.png" class="teddy">
+
+    <!-- TEDDY -->
+
+    <img
+        src="teddy_sonnenblume.png"
+        class="teddy"
+        alt="Teddy"
+    >
+
+
+    <!-- TEXT AM ANFANG -->
 
     <h1 id="title">
-        ich bin dein drück mich teddy, wenn justin wieder doof ist.
+
+        ich bin dein drück mich teddy,
+        wenn justin wieder doof ist.
+
     </h1>
 
-    <button class="heart" onclick="love()">
-        <img src="herz.png" alt="Herz">
+
+    <!-- KLICK-HERZ -->
+
+    <button
+        class="heart"
+        onclick="love()"
+    >
+
+        <img
+            src="herz.png"
+            alt="Herz"
+        >
+
     </button>
 
+
+    <!-- NACHRICHT NACH DEM KLICK -->
+
     <div id="message">
+
     </div>
+
 
 </div>
 
+
 <script>
 
-/*
-    BILDER + TEXTE
 
-    Hier kannst du deine eigenen Bilder
-    und Texte eintragen.
+/*
+=================================================
+BILDER + TEXTE
+=================================================
+
+Hier kannst du jederzeit neue Bilder
+und Texte hinzufügen.
+
+Das Bild muss genau so heißen wie die
+PNG-Datei in deinem GitHub-Ordner.
 */
+
 
 const surprises = [
 
+
     {
         image: "teddy_sonnenblume.png",
-        text: "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
+
+        text:
+        "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
     },
+
 
     {
         image: "teddy_herz.png",
-        text: "Justin denkt an dich.❤️"
+
+        text:
+        "Justin denkt an dich.❤️"
     },
+
 
     {
         image: "teddy_liebe.png",
-        text: "ich liebe diese blauen augen und die wundervolle doofe art❤️"
+
+        text:
+        "ich liebe diese blauen augen und die wundervolle doofe art❤️"
     },
+
 
     {
         image: "teddy_kuss.png",
-        text: "Ich bin so froh, dass es dich gibt ❤️"
+
+        text:
+        "Ich bin so froh, dass es dich gibt ❤️"
     },
+
 
     {
         image: "teddy_blumen.png",
-        text: "du bist der trottel den ich braucheee💗"
+
+        text:
+        "du bist der trottel den ich braucheee💗"
     },
+
 
     {
         image: "teddy_rot.png",
-        text: "Mit dir ist alles schöner 💞"
+
+        text:
+        "Mit dir ist alles schöner 💞"
     },
+
 
     {
         image: "teddy_herz2.png",
-        text: "Du bist mein safeplace ❤️"
+
+        text:
+        "Du bist mein safeplace ❤️"
     },
+
 
     {
         image: "teddy_liebe2.png",
-        text: "ich will dich niemals verlieren💕"
+
+        text:
+        "ich will dich niemals verlieren💕"
     }
+
 
 ];
 
@@ -240,63 +426,99 @@ const surprises = [
 let surpriseIndex = 0;
 
 
+/*
+=================================================
+HERZ WIRD GEDRÜCKT
+=================================================
+*/
+
 function love() {
 
+
     /*
-        "Für dich" beim ersten Klick ausblenden
+    ---------------------------------------------
+    "Für dich"-Text verschwinden
+    ---------------------------------------------
     */
 
-    document.getElementById("title")
+    document
+        .getElementById("title")
         .classList.add("hide");
 
 
     /*
-        TEDDY-BILD ÄNDERN
+    ---------------------------------------------
+    TEDDY-BILD ÄNDERN
+    ---------------------------------------------
     */
 
-    document.querySelector(".teddy").src =
+    document
+        .querySelector(".teddy")
+        .src =
         surprises[surpriseIndex].image;
 
 
     /*
-        TEXT ÄNDERN
+    ---------------------------------------------
+    NACHRICHT ÄNDERN
+    ---------------------------------------------
     */
 
     const message =
         document.getElementById("message");
+
 
     message.classList.remove("show");
 
 
     setTimeout(() => {
 
+
         message.innerHTML =
             surprises[surpriseIndex].text;
 
+
         message.classList.add("show");
+
 
     }, 100);
 
 
     /*
-        ZUM NÄCHSTEN BILD/TEXT
+    ---------------------------------------------
+    NÄCHSTES BILD + NÄCHSTER TEXT
+    ---------------------------------------------
     */
 
     surpriseIndex++;
 
-    if (surpriseIndex >= surprises.length) {
+
+    if (
+        surpriseIndex >=
+        surprises.length
+    ) {
+
         surpriseIndex = 0;
+
     }
 
 
     /*
-        FLIEGENDE HERZEN
+    =============================================
+    FLIEGENDE HERZEN
+    =============================================
     */
 
-    for (let i = 0; i < 12; i++) {
+    for (
+        let i = 0;
+        i < 12;
+        i++
+    ) {
+
 
         const heart =
             document.createElement("div");
+
 
         heart.className =
             "floating-heart";
@@ -305,36 +527,75 @@ function love() {
         const img =
             document.createElement("img");
 
-        img.src = "herz.png";
+
+        img.src =
+            "herz.png";
+
 
         heart.appendChild(img);
 
 
+        /*
+        Zufällige Startposition
+        */
+
         heart.style.left =
-            (40 + Math.random() * 20) + "vw";
+            (
+                40 +
+                Math.random() * 20
+            ) + "vw";
+
 
         heart.style.top =
-            (45 + Math.random() * 20) + "vh";
+            (
+                45 +
+                Math.random() * 20
+            ) + "vh";
 
+
+        /*
+        Zufällige Bewegung
+        */
 
         heart.style.setProperty(
+
             "--moveX",
-            (Math.random() * 700 - 350) + "px"
+
+            (
+                Math.random() * 700 -
+                350
+            ) + "px"
+
         );
 
 
-        document.body.appendChild(heart);
+        /*
+        Herz anzeigen
+        */
 
+        document
+            .body
+            .appendChild(heart);
+
+
+        /*
+        Herz wieder löschen
+        */
 
         setTimeout(() => {
+
             heart.remove();
+
         }, 2000);
+
 
     }
 
 }
 
+
 </script>
+
 
 </body>
 </html>
