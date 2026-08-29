@@ -930,6 +930,19 @@ body {
 
 
 <!-- =====================================================
+     MUSIK
+     ===================================================== -->
+
+<audio
+    id="gameMusic"
+    src="spielmusik.mp3"
+    loop
+    preload="auto"
+>
+</audio>
+
+
+<!-- =====================================================
      STARTSEITE
      ===================================================== -->
 
@@ -951,13 +964,7 @@ body {
     </h1>
 
 
-    <!--
-    WICHTIG:
-
-    Der Klick wird direkt mit
-    onclick="love()" ausgelöst.
-    -->
-
+    <!-- HERZ -->
 
     <button
         id="heartButton"
@@ -976,6 +983,8 @@ body {
 
     <div id="message"></div>
 
+
+    <!-- SPIEL START -->
 
     <button
         id="startGameButton"
@@ -1072,11 +1081,7 @@ body {
     </div>
 
 
-    <!--
-    NUR DIESE TASTE STEUERT
-    DEN SPRUNG.
-    -->
-
+    <!-- SPRUNG -->
 
     <button
         id="jumpButton"
@@ -1186,22 +1191,30 @@ const surprises = [
 
 
 /* =====================================================
-   ÜBERRASCHUNGS-ZÄHLER
+   VARIABLEN
    ===================================================== */
 
 let surpriseIndex = 0;
 
+let gameRunning = false;
+
+let jumpCount = 0;
+
+let score = 0;
+
+let obstacleSpeed = 2.2;
+
+let obstacleTimer = null;
+
+let collisionTimer = null;
+
 
 /* =====================================================
-   LOVE FUNKTION
+   LOVE
    ===================================================== */
 
 function love() {
 
-
-    /*
-    Aktuelle Überraschung holen.
-    */
 
     const surprise =
         surprises[
@@ -1210,8 +1223,7 @@ function love() {
 
 
     /*
-    Titel beim ersten Klick
-    verschwinden lassen.
+    Titel ausblenden.
     */
 
     if (
@@ -1226,7 +1238,7 @@ function love() {
 
 
     /*
-    TEDDY WECHSELN
+    Teddy wechseln.
     */
 
     document
@@ -1236,7 +1248,7 @@ function love() {
 
 
     /*
-    NACHRICHT
+    Nachricht.
     */
 
     const message =
@@ -1265,28 +1277,22 @@ function love() {
 
 
     /*
-    FLIEGENDE HERZEN
+    Fliegende Herzen.
     */
 
     createFlyingHearts();
 
 
     /*
-    ZUM NÄCHSTEN EINTRAG
+    Nächste Überraschung.
     */
 
     surpriseIndex++;
 
 
     /*
-    Wenn alle 8 Überraschungen
-    gezeigt wurden:
-
-    Spielbutton anzeigen.
-
-    WICHTIG:
-    Der Herzbutton wird NICHT
-    deaktiviert.
+    Nach allen Überraschungen
+    den Spielbutton zeigen.
     */
 
     if (
@@ -1301,10 +1307,10 @@ function love() {
             .style.display =
             "block";
 
+
         /*
-        Danach wieder von vorne.
-        Das Herz bleibt dadurch
-        immer benutzbar.
+        Herz bleibt weiterhin
+        anklickbar.
         */
 
         surpriseIndex = 0;
@@ -1389,37 +1395,14 @@ function createFlyingHearts() {
 
 
 /* =====================================================
-   SPIEL-VARIABLEN
-   ===================================================== */
-
-let gameRunning =
-    false;
-
-let jumpCount =
-    0;
-
-let score =
-    0;
-
-let obstacleSpeed =
-    2.2;
-
-let obstacleTimer =
-    null;
-
-let collisionTimer =
-    null;
-
-
-/* =====================================================
-   SPIEL START
+   SPIEL STARTEN
    ===================================================== */
 
 function startGame() {
 
 
     /*
-    Startseite verstecken.
+    Hauptseite verstecken.
     */
 
     document
@@ -1439,6 +1422,52 @@ function startGame() {
 
 
     /*
+    MUSIK STARTEN
+    */
+
+    const music =
+        document.getElementById(
+            "gameMusic"
+        );
+
+
+    /*
+    Von Anfang an starten.
+    */
+
+    music.currentTime = 0;
+
+
+    /*
+    Lautstärke.
+    */
+
+    music.volume = 0.5;
+
+
+    /*
+    Musik abspielen.
+
+    Der Aufruf passiert direkt
+    durch den Klick auf
+    "Spiel starten", deshalb
+    funktioniert er auch auf
+    mobilen Geräten.
+    */
+
+    music.play().catch(
+        function(error) {
+
+            console.log(
+                "Musik konnte nicht gestartet werden:",
+                error
+            );
+
+        }
+    );
+
+
+    /*
     Neues Spiel.
     */
 
@@ -1453,10 +1482,6 @@ function startGame() {
 
 function startNewGame() {
 
-
-    /*
-    Alte Timer stoppen.
-    */
 
     clearTimeout(
         obstacleTimer
@@ -1502,7 +1527,7 @@ function startNewGame() {
 
 
     /*
-    Game Over ausblenden.
+    Game Over verstecken.
     */
 
     document
@@ -1527,7 +1552,7 @@ function startNewGame() {
 
 
     /*
-    Punktestand.
+    Score.
     */
 
     updateScore();
@@ -1541,7 +1566,7 @@ function startNewGame() {
 
 
     /*
-    Kollision prüfen.
+    Kollision.
     */
 
     collisionTimer =
@@ -1554,7 +1579,7 @@ function startNewGame() {
 
 
 /* =====================================================
-   SPRINGEN
+   SPRUNG
    ===================================================== */
 
 function jump() {
@@ -1570,8 +1595,7 @@ function jump() {
 
 
     /*
-    Maximal zwei Sprünge
-    gleichzeitig.
+    Maximal zwei Sprünge.
     */
 
     if (
@@ -1610,11 +1634,8 @@ function jump() {
 
 
     /*
-    Nach dem Sprung
-    wieder freigeben.
-
-    Dadurch ist ein neuer
-    Doppelsprung möglich.
+    Doppelsprung wieder
+    freigeben.
     */
 
     setTimeout(
@@ -1670,7 +1691,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   HERZ HINDERNIS
+   HERZ HINDERNIS ERSTELLEN
    ===================================================== */
 
 function createObstacle() {
@@ -1713,8 +1734,7 @@ function createObstacle() {
 
 
     /*
-    Wenn das Herz rechts
-    raus ist -> Punkt.
+    Herz geschafft.
     */
 
     obstacle.addEventListener(
@@ -1763,7 +1783,7 @@ function createObstacle() {
 
 
     /*
-    Abstand wird kleiner.
+    Abstand reduzieren.
     */
 
     const nextTime =
@@ -1914,6 +1934,23 @@ function endGame() {
     );
 
 
+    /*
+    MUSIK STOPPEN
+    */
+
+    const music =
+        document.getElementById(
+            "gameMusic"
+        );
+
+
+    music.pause();
+
+
+    /*
+    Punktestand anzeigen.
+    */
+
     document
         .getElementById(
             "finalScore"
@@ -1924,6 +1961,10 @@ function endGame() {
         score +
         " Herzchen geschafft! 💕";
 
+
+    /*
+    Game Over anzeigen.
+    */
 
     document
         .getElementById(
@@ -1943,10 +1984,10 @@ function restartGame(event) {
 
 
     /*
-    Wichtig für Handy:
+    Wichtig für Handy.
 
-    Verhindert, dass der Klick
-    irgendwo weitergegeben wird.
+    Der Klick wird nicht
+    weitergereicht.
     */
 
     if (
@@ -1961,8 +2002,36 @@ function restartGame(event) {
 
 
     /*
-    Einfach ein komplett neues
-    Spiel starten.
+    Musik wieder von vorne.
+    */
+
+    const music =
+        document.getElementById(
+            "gameMusic"
+        );
+
+
+    music.pause();
+
+    music.currentTime = 0;
+
+    music.volume = 0.5;
+
+
+    music.play().catch(
+        function(error) {
+
+            console.log(
+                "Musik konnte nicht gestartet werden:",
+                error
+            );
+
+        }
+    );
+
+
+    /*
+    Neues Spiel.
     */
 
     startNewGame();
