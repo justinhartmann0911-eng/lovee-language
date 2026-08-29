@@ -180,6 +180,66 @@ h1.hide {
 
 
 /* =========================================
+   SPIEL STARTEN BUTTON
+   ========================================= */
+
+#startGameButton {
+
+    display: none;
+
+    margin:
+        25px auto 0;
+
+    border: none;
+
+    background: #d6336c;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    padding:
+        14px 28px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(
+            214,
+            51,
+            108,
+            0.25
+        );
+
+    touch-action: manipulation;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.15s ease,
+        background 0.2s ease;
+}
+
+
+#startGameButton:active {
+
+    transform:
+        scale(0.94);
+}
+
+
+#startGameButton:hover {
+
+    background: #c2255c;
+}
+
+
+/* =========================================
    FLIEGENDE HERZEN
    ========================================= */
 
@@ -305,10 +365,6 @@ h1.hide {
     border:
         4px solid #d6336c;
 
-    /*
-    DEIN SPIEL-HINTERGRUND
-    */
-
     background-image:
         url("hintergrund.png");
 
@@ -326,6 +382,8 @@ h1.hide {
             108,
             0.2
         );
+
+    touch-action: manipulation;
 }
 
 
@@ -372,6 +430,10 @@ h1.hide {
     image-rendering: pixelated;
 
     z-index: 5;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
 
 
@@ -427,6 +489,10 @@ h1.hide {
     image-rendering: pixelated;
 
     z-index: 4;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 
     animation:
         obstacleMove
@@ -494,6 +560,8 @@ h1.hide {
     align-items: center;
 
     flex-direction: column;
+
+    touch-action: auto;
 }
 
 
@@ -541,6 +609,14 @@ h1.hide {
     border-radius: 30px;
 
     cursor: pointer;
+
+    position: relative;
+
+    z-index: 30;
+
+    touch-action: manipulation;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -596,6 +672,17 @@ h1.hide {
 
         padding:
             0 20px;
+    }
+
+
+    #startGameButton {
+
+        font-size: 18px;
+
+        padding:
+            12px 23px;
+
+        margin-top: 20px;
     }
 
 
@@ -691,6 +778,7 @@ h1.hide {
 
     <button
         class="heart"
+        id="heartButton"
         onclick="love()"
     >
 
@@ -707,6 +795,21 @@ h1.hide {
          ===================================== -->
 
     <div id="message"></div>
+
+
+    <!-- =====================================
+         SPIEL STARTEN BUTTON
+         ===================================== -->
+
+    <button
+        id="startGameButton"
+        type="button"
+        onclick="startGame()"
+    >
+
+        🎮 Spiel starten ❤️
+
+    </button>
 
 
     <!-- =====================================
@@ -777,7 +880,7 @@ h1.hide {
 
                 <button
                     id="restart"
-                    onclick="restartGame()"
+                    type="button"
                 >
 
                     nochmal spielen ❤️
@@ -811,7 +914,6 @@ h1.hide {
    ========================================= */
 
 const surprises = [
-
 
     {
         image:
@@ -949,7 +1051,7 @@ function love() {
 
     /*
     Prüfen, ob letzte
-    Überraschung
+    Überraschung erreicht wurde.
     */
 
     const isLast =
@@ -982,17 +1084,26 @@ function love() {
 
 
     /*
-    Nach der letzten
-    Überraschung Spiel starten
+    WICHTIG:
+    Das Spiel startet NICHT automatisch.
+
+    Stattdessen erscheint nach
+    der letzten Überraschung
+    der Spiel-starten-Button.
     */
 
     if (isLast) {
 
         setTimeout(() => {
 
-            startGame();
+            document
+                .getElementById(
+                    "startGameButton"
+                )
+                .style.display =
+                "inline-block";
 
-        }, 1500);
+        }, 700);
 
     }
 
@@ -1036,10 +1147,6 @@ function createFlyingHearts() {
         heart.appendChild(img);
 
 
-        /*
-        Zufällige Position
-        */
-
         heart.style.left =
             (
                 40 +
@@ -1053,10 +1160,6 @@ function createFlyingHearts() {
                 Math.random() * 20
             ) + "vh";
 
-
-        /*
-        Zufällige Bewegung
-        */
 
         heart.style.setProperty(
 
@@ -1074,10 +1177,6 @@ function createFlyingHearts() {
             .body
             .appendChild(heart);
 
-
-        /*
-        Herz entfernen
-        */
 
         setTimeout(() => {
 
@@ -1106,9 +1205,7 @@ let collisionTimer = null;
 
 
 /*
-Je kleiner die Zahl,
-desto schneller fliegen
-die Herzchen.
+Startgeschwindigkeit
 */
 
 let obstacleSpeed = 2.2;
@@ -1119,6 +1216,18 @@ let obstacleSpeed = 2.2;
    ========================================= */
 
 function startGame() {
+
+
+    /*
+    Spiel-starten-Button verstecken
+    */
+
+    document
+        .getElementById(
+            "startGameButton"
+        )
+        .style.display =
+        "none";
 
 
     /*
@@ -1138,8 +1247,8 @@ function startGame() {
     */
 
     document
-        .querySelector(
-            ".heart"
+        .getElementById(
+            "heartButton"
         )
         .style.display =
         "none";
@@ -1186,6 +1295,32 @@ function startGame() {
 
 
     /*
+    Game Over verstecken
+    */
+
+    document
+        .getElementById(
+            "gameOver"
+        )
+        .style.display =
+        "none";
+
+
+    /*
+    Alte Herzen löschen
+    */
+
+    document
+        .querySelectorAll(
+            ".obstacle"
+        )
+        .forEach(
+            obstacle =>
+                obstacle.remove()
+        );
+
+
+    /*
     Erstes Herz erzeugen
     */
 
@@ -1193,7 +1328,7 @@ function startGame() {
 
 
     /*
-    Kollision starten
+    Kollision prüfen
     */
 
     collisionTimer =
@@ -1212,10 +1347,6 @@ function startGame() {
 function jump() {
 
 
-    /*
-    Spiel läuft nicht
-    */
-
     if (
         !gameRunning
     ) {
@@ -1226,7 +1357,7 @@ function jump() {
 
 
     /*
-    Bereits zwei Sprünge
+    Maximal zwei Sprünge
     */
 
     if (
@@ -1238,10 +1369,6 @@ function jump() {
     }
 
 
-    /*
-    Sprung zählen
-    */
-
     jumpCount++;
 
 
@@ -1252,18 +1379,13 @@ function jump() {
 
 
     /*
-    Animation zurücksetzen
+    Animation neu starten
     */
 
     player.classList.remove(
         "jump"
     );
 
-
-    /*
-    Browser zwingen,
-    Animation neu zu starten
-    */
 
     void player.offsetWidth;
 
@@ -1274,15 +1396,11 @@ function jump() {
 
 
     /*
-    Sprung nach 650ms beenden
+    Ersten Sprung beenden
     */
 
     setTimeout(() => {
 
-        /*
-        Wenn nur ein Sprung
-        gemacht wurde
-        */
 
         if (
             jumpCount === 1
@@ -1296,8 +1414,7 @@ function jump() {
 
 
     /*
-    Beim zweiten Sprung
-    ebenfalls zurücksetzen
+    Zweiten Sprung beenden
     */
 
     if (
@@ -1356,7 +1473,7 @@ function createObstacle() {
 
 
     /*
-    Aktuelle Geschwindigkeit
+    Geschwindigkeit
     */
 
     obstacle.style.animationDuration =
@@ -1369,8 +1486,7 @@ function createObstacle() {
 
 
     /*
-    Wenn das Herz
-    das Spielfeld verlassen hat
+    Herz verlässt Spielfeld
     */
 
     obstacle.addEventListener(
@@ -1384,10 +1500,6 @@ function createObstacle() {
 
                 obstacle.remove();
 
-
-                /*
-                Punkt bekommen
-                */
 
                 if (
                     gameRunning
@@ -1406,14 +1518,14 @@ function createObstacle() {
 
 
     /*
-    Herzchen immer schneller machen
+    Herzchen werden schneller
     */
 
     obstacleSpeed -= 0.08;
 
 
     /*
-    Nicht schneller als 0.75 Sekunden
+    Maximale Geschwindigkeit
     */
 
     if (
@@ -1426,8 +1538,8 @@ function createObstacle() {
 
 
     /*
-    Abstand zwischen den Herzen
-    wird ebenfalls kleiner
+    Abstand zwischen
+    den Herzen
     */
 
     const nextTime =
@@ -1486,11 +1598,6 @@ function checkCollision() {
             const obstacleRect =
                 obstacle.getBoundingClientRect();
 
-
-            /*
-            Kleiner Abstand,
-            damit es fairer ist
-            */
 
             const padding = 10;
 
@@ -1563,10 +1670,6 @@ function gameOver() {
     }
 
 
-    /*
-    Spiel stoppen
-    */
-
     gameRunning = false;
 
 
@@ -1580,10 +1683,6 @@ function gameOver() {
     );
 
 
-    /*
-    Ergebnis anzeigen
-    */
-
     document
         .getElementById(
             "finalScore"
@@ -1594,10 +1693,6 @@ function gameOver() {
         score +
         " Herzchen geschafft! 💕";
 
-
-    /*
-    Game Over anzeigen
-    */
 
     document
         .getElementById(
@@ -1617,7 +1712,20 @@ function restartGame() {
 
 
     /*
-    Alte Herzchen löschen
+    Timer stoppen
+    */
+
+    clearTimeout(
+        gameTimer
+    );
+
+    clearInterval(
+        collisionTimer
+    );
+
+
+    /*
+    Alte Herzen löschen
     */
 
     document
@@ -1631,7 +1739,7 @@ function restartGame() {
 
 
     /*
-    Game Over schließen
+    Game Over verstecken
     */
 
     document
@@ -1657,7 +1765,7 @@ function restartGame() {
 
 
     /*
-    Spiel starten
+    Spiel wieder starten
     */
 
     gameRunning = true;
@@ -1721,6 +1829,21 @@ document
         function(event) {
 
 
+            /*
+            Neustart-Button ignorieren
+            */
+
+            if (
+                event.target.closest(
+                    "#restart"
+                )
+            ) {
+
+                return;
+
+            }
+
+
             event.preventDefault();
 
 
@@ -1729,6 +1852,66 @@ document
         },
         {
             passive: false
+        }
+    );
+
+
+/* =========================================
+   HANDY NEUSTART-BUTTON
+   ========================================= */
+
+document
+    .getElementById(
+        "restart"
+    )
+    .addEventListener(
+        "touchend",
+        function(event) {
+
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            restartGame();
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+/* =========================================
+   PC / MAUS NEUSTART
+   ========================================= */
+
+document
+    .getElementById(
+        "restart"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+
+            /*
+            Bei Touch-Geräten übernimmt
+            touchend den Neustart.
+            */
+
+            if (
+                "ontouchstart" in window
+            ) {
+
+                return;
+
+            }
+
+
+            restartGame();
+
         }
     );
 
@@ -1743,7 +1926,24 @@ document
     )
     .addEventListener(
         "mousedown",
-        function() {
+        function(event) {
+
+
+            /*
+            Nicht springen,
+            wenn Button angeklickt wurde.
+            */
+
+            if (
+                event.target.closest(
+                    "#restart"
+                )
+            ) {
+
+                return;
+
+            }
+
 
             jump();
 
@@ -1756,3 +1956,4 @@ document
 </body>
 
 </html>
+
