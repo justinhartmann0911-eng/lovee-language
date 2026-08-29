@@ -133,10 +133,17 @@ h1.hide {
     height: 20px;
     display: block;
 }
+
+
+/* =========================================
+   HANDY
+   ========================================= */
+
 @media (max-width: 600px) {
 
+    /* Gesamten Inhalt auf dem Handy nach oben */
     .app {
-        transform: translateY(-80px);
+        transform: translateY(-100px);
     }
 
     .heart {
@@ -154,8 +161,6 @@ h1.hide {
 
 }
 
-
-}
 </style>
 </head>
 
@@ -165,7 +170,9 @@ h1.hide {
 
     <img src="teddy_sonnenblume.png" class="teddy">
 
-    <h1 id="title">ich bin dein drück mich teddy, wenn justin wieder doof ist.</h1>
+    <h1 id="title">
+        ich bin dein drück mich teddy, wenn justin wieder doof ist.
+    </h1>
 
     <button class="heart" onclick="love()">
         <img src="herz.png" alt="Herz">
