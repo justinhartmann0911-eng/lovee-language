@@ -1,60 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>svenja</title>
 
+
 <style>
+
+/* =========================================
+   GRUNDLAYOUT
+   ========================================= */
 
 * {
     box-sizing: border-box;
 }
 
 body {
+
     margin: 0;
+
     height: 100vh;
+
     overflow: hidden;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     font-family: Arial, sans-serif;
 
-    background: linear-gradient(
-        135deg,
-        #ffd6e7,
-        #fff0f6
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #ffd6e7,
+            #fff0f6
+        );
 }
 
+
 .app {
+
     text-align: center;
+
     width: 100%;
 }
 
+
+/* =========================================
+   TEDDY
+   ========================================= */
+
 .teddy {
+
     width: 300px;
+
     max-width: 80vw;
 
     border-radius: 25px;
 
     display: block;
 
-    margin: 0 auto 20px;
+    margin:
+        0 auto 20px;
 }
 
 
-/* Überschrift am Anfang */
+/* =========================================
+   START-TEXT
+   ========================================= */
 
 h1 {
+
     color: #d6336c;
 
     font-size: 32px;
 
-    margin: 10px 0 30px;
+    margin:
+        10px 0 30px;
 
     transition:
         opacity 0.5s ease,
@@ -63,9 +95,8 @@ h1 {
 }
 
 
-/* Überschrift verschwindet beim ersten Klick */
-
 h1.hide {
+
     opacity: 0;
 
     height: 0;
@@ -76,23 +107,24 @@ h1.hide {
 }
 
 
-/* Klick-Herz */
+/* =========================================
+   HERZ-BUTTON
+   ========================================= */
 
 .heart {
+
     border: none;
 
     background: transparent;
 
-    font-size: 120px;
-
     cursor: pointer;
-
-    transition: transform 0.2s;
 
     padding: 0;
 }
 
+
 .heart img {
+
     width: 120px;
 
     height: auto;
@@ -103,39 +135,17 @@ h1.hide {
         transform 0.3s ease;
 }
 
+
 .heart:active img {
-    transform: scale(1.5);
+
+    transform:
+        scale(1.5);
 }
 
 
-/* Herz-Pop Animation */
-
-@keyframes heartpop {
-
-    0% {
-        transform: scale(1);
-    }
-
-    30% {
-        transform: scale(1.6);
-    }
-
-    55% {
-        transform: scale(1.25);
-    }
-
-    75% {
-        transform: scale(1.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-
-}
-
-
-/* Nachricht */
+/* =========================================
+   NACHRICHT
+   ========================================= */
 
 #message {
 
@@ -149,22 +159,29 @@ h1.hide {
 
     opacity: 0;
 
-    transform: scale(0.5);
+    transform:
+        scale(0.5);
 
-    transition: 0.5s;
+    transition:
+        0.5s;
 
-    padding: 0 20px;
+    padding:
+        0 20px;
 }
+
 
 #message.show {
 
     opacity: 1;
 
-    transform: scale(1);
+    transform:
+        scale(1);
 }
 
 
-/* Fliegende Herzen */
+/* =========================================
+   FLIEGENDE HERZEN
+   ========================================= */
 
 @keyframes fly {
 
@@ -192,6 +209,7 @@ h1.hide {
 
 }
 
+
 .floating-heart {
 
     position: fixed;
@@ -208,7 +226,10 @@ h1.hide {
         fly 4s linear forwards;
 
     pointer-events: none;
+
+    z-index: 100;
 }
+
 
 .floating-heart img {
 
@@ -217,6 +238,316 @@ h1.hide {
     height: 20px;
 
     display: block;
+}
+
+
+/* =========================================
+   JUMP-SPIEL
+   ========================================= */
+
+#game {
+
+    display: none;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SPIEL-TITEL
+   ========================================= */
+
+#gameTitle {
+
+    color: #d6336c;
+
+    font-size: 30px;
+
+    margin:
+        0 0 10px;
+}
+
+
+#gameText {
+
+    color: #a61e4d;
+
+    font-size: 18px;
+
+    line-height: 1.4;
+
+    margin:
+        0 0 15px;
+}
+
+
+/* =========================================
+   SPIELFELD
+   ========================================= */
+
+#gameArea {
+
+    position: relative;
+
+    width:
+        min(900px, 94vw);
+
+    height: 300px;
+
+    margin: auto;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    border:
+        4px solid #d6336c;
+
+    /*
+    DEIN SPIEL-HINTERGRUND
+    */
+
+    background-image:
+        url("hintergrund.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            214,
+            51,
+            108,
+            0.2
+        );
+}
+
+
+/* =========================================
+   BODEN
+   ========================================= */
+
+#ground {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 8px;
+
+    background: #d6336c;
+
+    z-index: 3;
+}
+
+
+/* =========================================
+   PIXEL-TEDDY
+   ========================================= */
+
+#player {
+
+    position: absolute;
+
+    left: 80px;
+
+    bottom: 8px;
+
+    width: 65px;
+
+    height: 65px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    z-index: 5;
+}
+
+
+/* =========================================
+   TEDDY SPRUNG
+   ========================================= */
+
+#player.jump {
+
+    animation:
+        jump 0.65s ease-out;
+}
+
+
+@keyframes jump {
+
+    0% {
+
+        bottom: 8px;
+    }
+
+    50% {
+
+        bottom: 150px;
+    }
+
+    100% {
+
+        bottom: 8px;
+    }
+
+}
+
+
+/* =========================================
+   HERZ-HINDERNIS
+   ========================================= */
+
+.obstacle {
+
+    position: absolute;
+
+    right: -70px;
+
+    bottom: 8px;
+
+    width: 55px;
+
+    height: 55px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    z-index: 4;
+
+    animation:
+        obstacleMove
+        2.2s
+        linear
+        forwards;
+}
+
+
+@keyframes obstacleMove {
+
+    from {
+
+        right: -70px;
+    }
+
+    to {
+
+        right: 100%;
+    }
+
+}
+
+
+/* =========================================
+   PUNKTE
+   ========================================= */
+
+#score {
+
+    margin-top: 12px;
+
+    color: #d6336c;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   GAME OVER
+   ========================================= */
+
+#gameOver {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(
+            255,
+            240,
+            246,
+            0.94
+        );
+
+    z-index: 20;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+}
+
+
+#gameOver h2 {
+
+    color: #d6336c;
+
+    font-size: 34px;
+
+    margin: 5px;
+}
+
+
+#gameOver p {
+
+    color: #a61e4d;
+
+    font-size: 20px;
+
+    margin: 5px;
+}
+
+
+/* =========================================
+   NEUSTART-BUTTON
+   ========================================= */
+
+#restart {
+
+    margin-top: 15px;
+
+    border: none;
+
+    background: #d6336c;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    padding:
+        12px 25px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+}
+
+
+#restart:active {
+
+    transform:
+        scale(0.95);
 }
 
 
@@ -230,7 +561,7 @@ h1.hide {
 
         position: relative;
 
-        top: -80px;
+        top: -50px;
     }
 
 
@@ -251,14 +582,6 @@ h1.hide {
     }
 
 
-    .heart {
-
-        margin: 0;
-
-        padding: 0;
-    }
-
-
     .heart img {
 
         width: 100px;
@@ -275,12 +598,57 @@ h1.hide {
             0 20px;
     }
 
+
+    #game {
+
+        position: relative;
+
+        top: 0;
+    }
+
+
+    #gameTitle {
+
+        font-size: 25px;
+
+        margin-bottom: 5px;
+    }
+
+
+    #gameText {
+
+        font-size: 15px;
+
+        margin-bottom: 10px;
+    }
+
+
+    #gameArea {
+
+        height: 240px;
+
+        width: 94vw;
+    }
+
+
+    #player {
+
+        left: 40px;
+
+        width: 55px;
+
+        height: 55px;
+    }
+
+
+    .obstacle {
+
+        width: 48px;
+
+        height: 48px;
+    }
+
 }
-
-
-/* =========================================
-   BILDER + TEXTE
-   ========================================= */
 
 </style>
 
@@ -293,16 +661,21 @@ h1.hide {
 <div class="app">
 
 
-    <!-- TEDDY -->
+    <!-- =====================================
+         HAUPT-TEDDY
+         ===================================== -->
 
     <img
         src="teddy_sonnenblume.png"
         class="teddy"
+        id="mainTeddy"
         alt="Teddy"
     >
 
 
-    <!-- TEXT AM ANFANG -->
+    <!-- =====================================
+         START-TEXT
+         ===================================== -->
 
     <h1 id="title">
 
@@ -312,7 +685,9 @@ h1.hide {
     </h1>
 
 
-    <!-- KLICK-HERZ -->
+    <!-- =====================================
+         HERZ-BUTTON
+         ===================================== -->
 
     <button
         class="heart"
@@ -327,98 +702,187 @@ h1.hide {
     </button>
 
 
-    <!-- NACHRICHT NACH DEM KLICK -->
+    <!-- =====================================
+         NACHRICHT
+         ===================================== -->
 
-    <div id="message">
+    <div id="message"></div>
+
+
+    <!-- =====================================
+         JUMP-SPIEL
+         ===================================== -->
+
+    <div id="game">
+
+
+        <div id="gameTitle">
+
+            🧸 Kleines Herzchen-Jump 💕
+
+        </div>
+
+
+        <div id="gameText">
+
+            Spring über die Herzchen!
+
+            <br>
+
+            PC:
+            Leertaste / Pfeil hoch
+
+            ·
+
+            Handy:
+            Tippen
+
+        </div>
+
+
+        <div id="gameArea">
+
+
+            <!-- PIXEL-TEDDY -->
+
+            <img
+                src="teddy.png"
+                id="player"
+                alt="Pixel Teddy"
+            >
+
+
+            <!-- BODEN -->
+
+            <div id="ground"></div>
+
+
+            <!-- GAME OVER -->
+
+            <div id="gameOver">
+
+                <h2>
+                    Oh nein! 💔
+                </h2>
+
+
+                <p>
+                    Der Teddy ist gegen
+                    ein Herz gelaufen!
+                </p>
+
+
+                <p id="finalScore"></p>
+
+
+                <button
+                    id="restart"
+                    onclick="restartGame()"
+                >
+
+                    nochmal spielen ❤️
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+        <div id="score">
+
+            Herzen übersprungen: 0
+
+        </div>
+
 
     </div>
 
-
 </div>
+
 
 
 <script>
 
 
-/*
-=================================================
-BILDER + TEXTE
-=================================================
-
-Hier kannst du jederzeit neue Bilder
-und Texte hinzufügen.
-
-Das Bild muss genau so heißen wie die
-PNG-Datei in deinem GitHub-Ordner.
-*/
-
+/* =========================================
+   ÜBERRASCHUNGEN
+   ========================================= */
 
 const surprises = [
 
 
     {
-        image: "teddy_sonnenblume.png",
+        image:
+            "teddy_sonnenblume.png",
 
         text:
-        "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
+            "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
     },
 
 
     {
-        image: "teddy_herz.png",
+        image:
+            "teddy_herz.png",
 
         text:
-        "Justin denkt an dich.❤️"
+            "Justin denkt an dich.❤️"
     },
 
 
     {
-        image: "teddy_liebe.png",
+        image:
+            "teddy_liebe.png",
 
         text:
-        "ich liebe diese blauen augen und die wundervolle doofe art❤️"
+            "ich liebe diese blauen augen und die wundervolle doofe art❤️"
     },
 
 
     {
-        image: "teddy_kuss.png",
+        image:
+            "teddy_kuss.png",
 
         text:
-        "Ich bin so froh, dass es dich gibt ❤️"
+            "Ich bin so froh, dass es dich gibt ❤️"
     },
 
 
     {
-        image: "teddy_blumen.png",
+        image:
+            "teddy_blumen.png",
 
         text:
-        "du bist der trottel den ich braucheee💗"
+            "du bist der trottel den ich braucheee💗"
     },
 
 
     {
-        image: "teddy_rot.png",
+        image:
+            "teddy_rot.png",
 
         text:
-        "Mit dir ist alles schöner 💞"
+            "Mit dir ist alles schöner 💞"
     },
 
 
     {
-        image: "teddy_herz2.png",
+        image:
+            "teddy_herz2.png",
 
         text:
-        "Du bist mein safeplace ❤️"
+            "Du bist mein safeplace ❤️"
     },
 
 
     {
-        image: "teddy_liebe2.png",
+        image:
+            "teddy_liebe2.png",
 
         text:
-        "ich will dich niemals verlieren💕"
+            "ich will dich niemals verlieren💕"
     }
-
 
 ];
 
@@ -426,19 +890,15 @@ const surprises = [
 let surpriseIndex = 0;
 
 
-/*
-=================================================
-HERZ WIRD GEDRÜCKT
-=================================================
-*/
+/* =========================================
+   HERZ WIRD GEDRÜCKT
+   ========================================= */
 
 function love() {
 
 
     /*
-    ---------------------------------------------
-    "Für dich"-Text verschwinden
-    ---------------------------------------------
+    Titel ausblenden
     */
 
     document
@@ -447,47 +907,58 @@ function love() {
 
 
     /*
-    ---------------------------------------------
-    TEDDY-BILD ÄNDERN
-    ---------------------------------------------
+    Teddy ändern
     */
 
     document
-        .querySelector(".teddy")
+        .getElementById("mainTeddy")
         .src =
-        surprises[surpriseIndex].image;
+        surprises[
+            surpriseIndex
+        ].image;
 
 
     /*
-    ---------------------------------------------
-    NACHRICHT ÄNDERN
-    ---------------------------------------------
+    Nachricht anzeigen
     */
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
 
 
-    message.classList.remove("show");
+    message.classList.remove(
+        "show"
+    );
 
 
     setTimeout(() => {
 
-
         message.innerHTML =
-            surprises[surpriseIndex].text;
+            surprises[
+                surpriseIndex
+            ].text;
 
-
-        message.classList.add("show");
-
+        message.classList.add(
+            "show"
+        );
 
     }, 100);
 
 
     /*
-    ---------------------------------------------
-    NÄCHSTES BILD + NÄCHSTER TEXT
-    ---------------------------------------------
+    Prüfen, ob letzte
+    Überraschung
+    */
+
+    const isLast =
+        surpriseIndex ===
+        surprises.length - 1;
+
+
+    /*
+    Nächste Überraschung
     */
 
     surpriseIndex++;
@@ -504,10 +975,36 @@ function love() {
 
 
     /*
-    =============================================
-    FLIEGENDE HERZEN
-    =============================================
+    Fliegende Herzen
     */
+
+    createFlyingHearts();
+
+
+    /*
+    Nach der letzten
+    Überraschung Spiel starten
+    */
+
+    if (isLast) {
+
+        setTimeout(() => {
+
+            startGame();
+
+        }, 1500);
+
+    }
+
+}
+
+
+/* =========================================
+   FLIEGENDE HERZEN
+   ========================================= */
+
+function createFlyingHearts() {
+
 
     for (
         let i = 0;
@@ -517,7 +1014,9 @@ function love() {
 
 
         const heart =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         heart.className =
@@ -525,7 +1024,9 @@ function love() {
 
 
         const img =
-            document.createElement("img");
+            document.createElement(
+                "img"
+            );
 
 
         img.src =
@@ -536,7 +1037,7 @@ function love() {
 
 
         /*
-        Zufällige Startposition
+        Zufällige Position
         */
 
         heart.style.left =
@@ -569,33 +1070,689 @@ function love() {
         );
 
 
-        /*
-        Herz anzeigen
-        */
-
         document
             .body
             .appendChild(heart);
 
 
         /*
-        Herz wieder löschen
+        Herz entfernen
         */
 
         setTimeout(() => {
 
             heart.remove();
 
-        }, 2000);
-
+        }, 4000);
 
     }
 
 }
 
 
+/* =========================================
+   JUMP-GAME VARIABLEN
+   ========================================= */
+
+let gameRunning = false;
+
+let jumpCount = 0;
+
+let score = 0;
+
+let gameTimer = null;
+
+let collisionTimer = null;
+
+
+/*
+Je kleiner die Zahl,
+desto schneller fliegen
+die Herzchen.
+*/
+
+let obstacleSpeed = 2.2;
+
+
+/* =========================================
+   SPIEL STARTEN
+   ========================================= */
+
+function startGame() {
+
+
+    /*
+    Haupt-Teddy verstecken
+    */
+
+    document
+        .getElementById(
+            "mainTeddy"
+        )
+        .style.display =
+        "none";
+
+
+    /*
+    Herz-Button verstecken
+    */
+
+    document
+        .querySelector(
+            ".heart"
+        )
+        .style.display =
+        "none";
+
+
+    /*
+    Nachricht verstecken
+    */
+
+    document
+        .getElementById(
+            "message"
+        )
+        .style.display =
+        "none";
+
+
+    /*
+    Spiel anzeigen
+    */
+
+    document
+        .getElementById(
+            "game"
+        )
+        .style.display =
+        "block";
+
+
+    /*
+    Werte zurücksetzen
+    */
+
+    gameRunning = true;
+
+    score = 0;
+
+    jumpCount = 0;
+
+    obstacleSpeed = 2.2;
+
+
+    updateScore();
+
+
+    /*
+    Erstes Herz erzeugen
+    */
+
+    createObstacle();
+
+
+    /*
+    Kollision starten
+    */
+
+    collisionTimer =
+        setInterval(
+            checkCollision,
+            30
+        );
+
+}
+
+
+/* =========================================
+   DOPPELSPRUNG
+   ========================================= */
+
+function jump() {
+
+
+    /*
+    Spiel läuft nicht
+    */
+
+    if (
+        !gameRunning
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    Bereits zwei Sprünge
+    */
+
+    if (
+        jumpCount >= 2
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    Sprung zählen
+    */
+
+    jumpCount++;
+
+
+    const player =
+        document.getElementById(
+            "player"
+        );
+
+
+    /*
+    Animation zurücksetzen
+    */
+
+    player.classList.remove(
+        "jump"
+    );
+
+
+    /*
+    Browser zwingen,
+    Animation neu zu starten
+    */
+
+    void player.offsetWidth;
+
+
+    player.classList.add(
+        "jump"
+    );
+
+
+    /*
+    Sprung nach 650ms beenden
+    */
+
+    setTimeout(() => {
+
+        /*
+        Wenn nur ein Sprung
+        gemacht wurde
+        */
+
+        if (
+            jumpCount === 1
+        ) {
+
+            jumpCount = 0;
+
+        }
+
+    }, 650);
+
+
+    /*
+    Beim zweiten Sprung
+    ebenfalls zurücksetzen
+    */
+
+    if (
+        jumpCount === 2
+    ) {
+
+        setTimeout(() => {
+
+            jumpCount = 0;
+
+        }, 650);
+
+    }
+
+}
+
+
+/* =========================================
+   HERZCHEN ERZEUGEN
+   ========================================= */
+
+function createObstacle() {
+
+
+    if (
+        !gameRunning
+    ) {
+
+        return;
+
+    }
+
+
+    const gameArea =
+        document.getElementById(
+            "gameArea"
+        );
+
+
+    const obstacle =
+        document.createElement(
+            "img"
+        );
+
+
+    /*
+    Dein Pixel-Herz
+    */
+
+    obstacle.src =
+        "herzspiel.png";
+
+
+    obstacle.className =
+        "obstacle";
+
+
+    /*
+    Aktuelle Geschwindigkeit
+    */
+
+    obstacle.style.animationDuration =
+        obstacleSpeed + "s";
+
+
+    gameArea.appendChild(
+        obstacle
+    );
+
+
+    /*
+    Wenn das Herz
+    das Spielfeld verlassen hat
+    */
+
+    obstacle.addEventListener(
+        "animationend",
+        () => {
+
+
+            if (
+                obstacle.parentElement
+            ) {
+
+                obstacle.remove();
+
+
+                /*
+                Punkt bekommen
+                */
+
+                if (
+                    gameRunning
+                ) {
+
+                    score++;
+
+                    updateScore();
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /*
+    Herzchen immer schneller machen
+    */
+
+    obstacleSpeed -= 0.08;
+
+
+    /*
+    Nicht schneller als 0.75 Sekunden
+    */
+
+    if (
+        obstacleSpeed < 0.75
+    ) {
+
+        obstacleSpeed = 0.75;
+
+    }
+
+
+    /*
+    Abstand zwischen den Herzen
+    wird ebenfalls kleiner
+    */
+
+    const nextTime =
+        Math.max(
+            550,
+            1500 -
+            score * 25
+        );
+
+
+    gameTimer =
+        setTimeout(
+            createObstacle,
+            nextTime
+        );
+
+}
+
+
+/* =========================================
+   KOLLISION
+   ========================================= */
+
+function checkCollision() {
+
+
+    if (
+        !gameRunning
+    ) {
+
+        return;
+
+    }
+
+
+    const player =
+        document.getElementById(
+            "player"
+        );
+
+
+    const playerRect =
+        player.getBoundingClientRect();
+
+
+    const obstacles =
+        document.querySelectorAll(
+            ".obstacle"
+        );
+
+
+    obstacles.forEach(
+        obstacle => {
+
+
+            const obstacleRect =
+                obstacle.getBoundingClientRect();
+
+
+            /*
+            Kleiner Abstand,
+            damit es fairer ist
+            */
+
+            const padding = 10;
+
+
+            const collision =
+
+                playerRect.left +
+                padding <
+                obstacleRect.right &&
+
+                playerRect.right -
+                padding >
+                obstacleRect.left &&
+
+                playerRect.top +
+                padding <
+                obstacleRect.bottom &&
+
+                playerRect.bottom -
+                padding >
+                obstacleRect.top;
+
+
+            if (
+                collision
+            ) {
+
+                gameOver();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   PUNKTE AKTUALISIEREN
+   ========================================= */
+
+function updateScore() {
+
+
+    document
+        .getElementById(
+            "score"
+        )
+        .innerHTML =
+
+        "Herzen übersprungen: " +
+        score;
+
+}
+
+
+/* =========================================
+   GAME OVER
+   ========================================= */
+
+function gameOver() {
+
+
+    if (
+        !gameRunning
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+    Spiel stoppen
+    */
+
+    gameRunning = false;
+
+
+    clearTimeout(
+        gameTimer
+    );
+
+
+    clearInterval(
+        collisionTimer
+    );
+
+
+    /*
+    Ergebnis anzeigen
+    */
+
+    document
+        .getElementById(
+            "finalScore"
+        )
+        .innerHTML =
+
+        "Du hast " +
+        score +
+        " Herzchen geschafft! 💕";
+
+
+    /*
+    Game Over anzeigen
+    */
+
+    document
+        .getElementById(
+            "gameOver"
+        )
+        .style.display =
+        "flex";
+
+}
+
+
+/* =========================================
+   NEUSTART
+   ========================================= */
+
+function restartGame() {
+
+
+    /*
+    Alte Herzchen löschen
+    */
+
+    document
+        .querySelectorAll(
+            ".obstacle"
+        )
+        .forEach(
+            obstacle =>
+                obstacle.remove()
+        );
+
+
+    /*
+    Game Over schließen
+    */
+
+    document
+        .getElementById(
+            "gameOver"
+        )
+        .style.display =
+        "none";
+
+
+    /*
+    Werte zurücksetzen
+    */
+
+    score = 0;
+
+    jumpCount = 0;
+
+    obstacleSpeed = 2.2;
+
+
+    updateScore();
+
+
+    /*
+    Spiel starten
+    */
+
+    gameRunning = true;
+
+
+    createObstacle();
+
+
+    collisionTimer =
+        setInterval(
+            checkCollision,
+            30
+        );
+
+}
+
+
+/* =========================================
+   PC STEUERUNG
+   ========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+
+        if (
+
+            event.code ===
+                "Space"
+
+            ||
+
+            event.code ===
+                "ArrowUp"
+
+        ) {
+
+
+            event.preventDefault();
+
+
+            jump();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   HANDY STEUERUNG
+   ========================================= */
+
+document
+    .getElementById(
+        "gameArea"
+    )
+    .addEventListener(
+        "touchstart",
+        function(event) {
+
+
+            event.preventDefault();
+
+
+            jump();
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+/* =========================================
+   MAUS STEUERUNG
+   ========================================= */
+
+document
+    .getElementById(
+        "gameArea"
+    )
+    .addEventListener(
+        "mousedown",
+        function() {
+
+            jump();
+
+        }
+    );
+
 </script>
 
 
 </body>
+
 </html>
