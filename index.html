@@ -5,7 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>svenja</title>
 
@@ -29,8 +32,11 @@ body {
 }
 
 body {
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     font-family: Arial, sans-serif;
@@ -44,17 +50,21 @@ body {
 }
 
 .app {
+
     width: 100%;
+
     text-align: center;
 }
 
 
 /* =========================================
-   TEDDY
+   HAUPT-TEDDY
    ========================================= */
 
 .teddy {
+
     width: 300px;
+
     max-width: 80vw;
 
     border-radius: 25px;
@@ -71,6 +81,7 @@ body {
    ========================================= */
 
 h1 {
+
     color: #d6336c;
 
     font-size: 32px;
@@ -85,31 +96,48 @@ h1 {
 }
 
 h1.hide {
+
     opacity: 0;
+
     height: 0;
+
     margin: 0;
+
     overflow: hidden;
 }
 
 
 /* =========================================
-   HERZ BUTTON
+   HERZ-BUTTON
    ========================================= */
 
 .heart {
+
     border: none;
 
     background: transparent;
 
+    padding: 0;
+
+    margin: 0 auto;
+
     cursor: pointer;
 
-    padding: 0;
+    display: block;
+
+    position: relative;
+
+    z-index: 10;
 
     -webkit-tap-highlight-color:
         transparent;
+
+    touch-action: manipulation;
 }
 
+
 .heart img {
+
     width: 120px;
 
     height: auto;
@@ -117,12 +145,14 @@ h1.hide {
     display: block;
 
     transition:
-        transform 0.3s ease;
+        transform 0.2s ease;
 }
 
+
 .heart:active img {
+
     transform:
-        scale(1.5);
+        scale(1.4);
 }
 
 
@@ -131,6 +161,7 @@ h1.hide {
    ========================================= */
 
 #message {
+
     margin-top: 25px;
 
     font-size: 30px;
@@ -151,7 +182,9 @@ h1.hide {
         0 20px;
 }
 
+
 #message.show {
+
     opacity: 1;
 
     transform:
@@ -189,7 +222,7 @@ h1.hide {
 
     position: relative;
 
-    z-index: 50;
+    z-index: 20;
 
     touch-action: manipulation;
 
@@ -197,7 +230,9 @@ h1.hide {
         transparent;
 }
 
+
 #startGameButton:active {
+
     transform:
         scale(0.94);
 }
@@ -210,6 +245,7 @@ h1.hide {
 @keyframes fly {
 
     from {
+
         top: 55%;
 
         opacity: 1;
@@ -220,6 +256,7 @@ h1.hide {
     }
 
     to {
+
         top: -20%;
 
         opacity: 0;
@@ -230,6 +267,7 @@ h1.hide {
     }
 
 }
+
 
 .floating-heart {
 
@@ -246,6 +284,7 @@ h1.hide {
 
     z-index: 100;
 }
+
 
 .floating-heart img {
 
@@ -361,7 +400,7 @@ h1.hide {
 
 
 /* =========================================
-   SPIEL TEDDY
+   PIXEL TEDDY
    ========================================= */
 
 #player {
@@ -402,14 +441,17 @@ h1.hide {
 @keyframes jump {
 
     0% {
+
         bottom: 8px;
     }
 
     50% {
+
         bottom: 150px;
     }
 
     100% {
+
         bottom: 8px;
     }
 
@@ -417,7 +459,7 @@ h1.hide {
 
 
 /* =========================================
-   HERZ HINDERNIS
+   HERZ-HINDERNISSE
    ========================================= */
 
 .obstacle {
@@ -451,10 +493,12 @@ h1.hide {
 @keyframes obstacleMove {
 
     from {
+
         right: -70px;
     }
 
     to {
+
         right: 100%;
     }
 
@@ -462,7 +506,7 @@ h1.hide {
 
 
 /* =========================================
-   SPRUNG TASTE
+   SPRUNG-TASTE
    ========================================= */
 
 #jumpButton {
@@ -619,6 +663,7 @@ h1.hide {
         transparent;
 }
 
+
 #restart:active {
 
     transform:
@@ -633,12 +678,15 @@ h1.hide {
 @media (max-width: 600px) {
 
     .app {
+
         position: relative;
+
         top: -20px;
     }
 
 
     .teddy {
+
         width: 260px;
 
         margin-bottom: 15px;
@@ -646,6 +694,7 @@ h1.hide {
 
 
     h1 {
+
         font-size: 25px;
 
         margin:
@@ -654,11 +703,13 @@ h1.hide {
 
 
     .heart img {
+
         width: 100px;
     }
 
 
     #message {
+
         margin-top: 10px;
 
         font-size: 24px;
@@ -822,7 +873,7 @@ h1.hide {
 
 
     <!-- =====================================
-         SPIEL STARTEN
+         SPIEL START BUTTON
          ===================================== -->
 
     <button
@@ -836,7 +887,7 @@ h1.hide {
 
 
     <!-- =====================================
-         JUMP SPIEL
+         SPIEL
          ===================================== -->
 
     <div id="game">
@@ -855,7 +906,11 @@ h1.hide {
 
             <br>
 
-            PC: Leertaste oder Pfeil hoch
+            Handy: SPRINGEN-Taste
+
+            ·
+
+            PC: Leertaste / Pfeil hoch
 
         </div>
 
@@ -917,7 +972,7 @@ h1.hide {
 
 
         <!-- =================================
-             SPRUNG TASTE
+             SPRUNG BUTTON
              ================================= -->
 
         <button
@@ -949,7 +1004,6 @@ h1.hide {
 
 <script>
 
-
 /* =========================================
    ÜBERRASCHUNGEN
    ========================================= */
@@ -957,78 +1011,82 @@ h1.hide {
 const surprises = [
 
     {
-        image:
-            "teddy_sonnenblume.png",
+        image: "teddy_sonnenblume.png",
 
         text:
-            "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
+        "denk dran dieser bubi liebt dich, egal wie doof er ist. 💕"
     },
 
 
     {
-        image:
-            "teddy_herz.png",
+        image: "teddy_herz.png",
 
         text:
-            "Justin denkt an dich.❤️"
+        "Justin denkt an dich.❤️"
     },
 
 
     {
-        image:
-            "teddy_liebe.png",
+        image: "teddy_liebe.png",
 
         text:
-            "ich liebe diese blauen augen und die wundervolle doofe art❤️"
+        "ich liebe diese blauen augen und die wundervolle doofe art❤️"
     },
 
 
     {
-        image:
-            "teddy_kuss.png",
+        image: "teddy_kuss.png",
 
         text:
-            "Ich bin so froh, dass es dich gibt ❤️"
+        "Ich bin so froh, dass es dich gibt ❤️"
     },
 
 
     {
-        image:
-            "teddy_blumen.png",
+        image: "teddy_blumen.png",
 
         text:
-            "du bist der trottel den ich braucheee💗"
+        "du bist der trottel den ich braucheee💗"
     },
 
 
     {
-        image:
-            "teddy_rot.png",
+        image: "teddy_rot.png",
 
         text:
-            "Mit dir ist alles schöner 💞"
+        "Mit dir ist alles schöner 💞"
     },
 
 
     {
-        image:
-            "teddy_herz2.png",
+        image: "teddy_herz2.png",
 
         text:
-            "Du bist mein safeplace ❤️"
+        "Du bist mein safeplace ❤️"
     },
 
 
     {
-        image:
-            "teddy_liebe2.png",
+        image: "teddy_liebe2.png",
 
         text:
-            "ich will dich niemals verlieren💕"
+        "ich will dich niemals verlieren💕"
     }
 
 ];
 
+
+/*
+Wichtig:
+
+0 = erste Überraschung
+1 = zweite Überraschung
+...
+7 = letzte Überraschung
+
+Nach dem 8. Klick erscheint
+der Spiel-Startbutton.
+*/
 
 let surpriseIndex = 0;
 
@@ -1038,48 +1096,80 @@ let surpriseIndex = 0;
    ========================================= */
 
 const title =
-    document.getElementById("title");
+    document.getElementById(
+        "title"
+    );
 
 const mainTeddy =
-    document.getElementById("mainTeddy");
+    document.getElementById(
+        "mainTeddy"
+    );
 
 const heartButton =
-    document.getElementById("heartButton");
+    document.getElementById(
+        "heartButton"
+    );
 
 const message =
-    document.getElementById("message");
+    document.getElementById(
+        "message"
+    );
 
 const startGameButton =
-    document.getElementById("startGameButton");
+    document.getElementById(
+        "startGameButton"
+    );
 
 const game =
-    document.getElementById("game");
+    document.getElementById(
+        "game"
+    );
 
 const gameArea =
-    document.getElementById("gameArea");
+    document.getElementById(
+        "gameArea"
+    );
 
 const player =
-    document.getElementById("player");
+    document.getElementById(
+        "player"
+    );
 
 const gameOver =
-    document.getElementById("gameOver");
+    document.getElementById(
+        "gameOver"
+    );
 
 const restart =
-    document.getElementById("restart");
+    document.getElementById(
+        "restart"
+    );
 
 const jumpButton =
-    document.getElementById("jumpButton");
+    document.getElementById(
+        "jumpButton"
+    );
 
 
 /* =========================================
-   HERZ DRÜCKEN
+   HERZ KLICK
    ========================================= */
 
 function love() {
 
+    /*
+    Titel beim ersten Klick
+    verschwinden lassen.
+    */
 
-    title.classList.add("hide");
+    title.classList.add(
+        "hide"
+    );
 
+
+    /*
+    AKTUELLEN Teddy anzeigen.
+    */
 
     mainTeddy.src =
         surprises[
@@ -1087,7 +1177,13 @@ function love() {
         ].image;
 
 
-    message.classList.remove("show");
+    /*
+    Nachricht neu anzeigen.
+    */
+
+    message.classList.remove(
+        "show"
+    );
 
 
     setTimeout(() => {
@@ -1097,18 +1193,49 @@ function love() {
                 surpriseIndex
             ].text;
 
-        message.classList.add("show");
+        message.classList.add(
+            "show"
+        );
 
     }, 100);
 
 
-    const isLast =
+    /*
+    Fliegende Herzen.
+    */
+
+    createFlyingHearts();
+
+
+    /*
+    Prüfen, ob DAS die
+    letzte Überraschung ist.
+
+    Wichtig:
+    Die Variable wird VOR dem
+    Hochzählen geprüft.
+    */
+
+    const lastSurprise =
         surpriseIndex ===
         surprises.length - 1;
 
 
+    /*
+    Erst danach zum nächsten
+    Eintrag wechseln.
+    */
+
     surpriseIndex++;
 
+
+    /*
+    Nach der letzten Überraschung
+    wieder bei 0 anfangen.
+
+    Der Spielbutton bleibt aber
+    sichtbar.
+    */
 
     if (
         surpriseIndex >=
@@ -1120,28 +1247,30 @@ function love() {
     }
 
 
-    createFlyingHearts();
-
-
     /*
-    Nach der letzten Nachricht
-    wird nur der Spielstartbutton
-    angezeigt.
+    NUR nach der letzten
+    Überraschung den Spielbutton
+    anzeigen.
+
+    Das Herz bleibt dabei
+    weiterhin funktionsfähig.
     */
 
-    if (isLast) {
+    if (
+        lastSurprise
+    ) {
 
-        setTimeout(() => {
-
-            startGameButton.style.display =
-                "inline-block";
-
-        }, 700);
+        startGameButton.style.display =
+            "block";
 
     }
 
 }
 
+
+/* =========================================
+   HERZ BUTTON
+   ========================================= */
 
 heartButton.addEventListener(
     "click",
@@ -1164,7 +1293,9 @@ function createFlyingHearts() {
 
 
         const heart =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         heart.className =
@@ -1172,14 +1303,18 @@ function createFlyingHearts() {
 
 
         const img =
-            document.createElement("img");
+            document.createElement(
+                "img"
+            );
 
 
         img.src =
             "herz.png";
 
 
-        heart.appendChild(img);
+        heart.appendChild(
+            img
+        );
 
 
         heart.style.left =
@@ -1197,11 +1332,14 @@ function createFlyingHearts() {
 
 
         heart.style.setProperty(
+
             "--moveX",
+
             (
                 Math.random() * 700 -
                 350
             ) + "px"
+
         );
 
 
@@ -1222,7 +1360,7 @@ function createFlyingHearts() {
 
 
 /* =========================================
-   GAME VARIABLEN
+   SPIEL VARIABLEN
    ========================================= */
 
 let gameRunning = false;
@@ -1245,25 +1383,37 @@ let obstacleSpeed = 2.2;
 function startGame() {
 
 
-    startGameButton.style.display =
-        "none";
-
+    /*
+    Hauptbereich verstecken.
+    */
 
     mainTeddy.style.display =
         "none";
 
+    title.style.display =
+        "none";
 
     heartButton.style.display =
         "none";
 
-
     message.style.display =
         "none";
 
+    startGameButton.style.display =
+        "none";
+
+
+    /*
+    Spiel anzeigen.
+    */
 
     game.style.display =
         "block";
 
+
+    /*
+    Werte zurücksetzen.
+    */
 
     gameRunning = true;
 
@@ -1274,12 +1424,22 @@ function startGame() {
     obstacleSpeed = 2.2;
 
 
+    /*
+    Game Over verstecken.
+    */
+
     gameOver.style.display =
         "none";
 
 
+    /*
+    Alte Herzen löschen.
+    */
+
     document
-        .querySelectorAll(".obstacle")
+        .querySelectorAll(
+            ".obstacle"
+        )
         .forEach(
             obstacle =>
                 obstacle.remove()
@@ -1289,8 +1449,16 @@ function startGame() {
     updateScore();
 
 
+    /*
+    Erstes Hindernis.
+    */
+
     createObstacle();
 
+
+    /*
+    Kollision prüfen.
+    */
 
     collisionTimer =
         setInterval(
@@ -1308,7 +1476,7 @@ startGameButton.addEventListener(
 
 
 /* =========================================
-   SPRINGEN
+   SPRUNG
    ========================================= */
 
 function jump() {
@@ -1324,7 +1492,7 @@ function jump() {
 
 
     /*
-    Maximal zwei Sprünge
+    Maximal zwei Sprünge.
     */
 
     if (
@@ -1340,7 +1508,7 @@ function jump() {
 
 
     /*
-    Animation neu starten
+    Animation zurücksetzen.
     */
 
     player.classList.remove(
@@ -1351,14 +1519,21 @@ function jump() {
     void player.offsetWidth;
 
 
+    /*
+    Neuen Sprung starten.
+    */
+
     player.classList.add(
         "jump"
     );
 
 
     /*
-    Nach einem Sprung
-    wieder Sprung erlauben.
+    Nach dem Sprung wieder
+    beide Sprünge freigeben.
+
+    Dadurch kann man erneut
+    einen Doppelsprung machen.
     */
 
     setTimeout(() => {
@@ -1371,21 +1546,11 @@ function jump() {
 
 
 /* =========================================
-   SPRUNG BUTTON
+   SPRUNG-TASTE
    ========================================= */
 
-/*
-Der Button funktioniert
-mit Handy und PC.
-
-pointerdown sorgt dafür,
-dass Touchgeräte nicht
-auf einen verzögerten
-click warten müssen.
-*/
-
 jumpButton.addEventListener(
-    "pointerdown",
+    "click",
     function(event) {
 
         event.preventDefault();
@@ -1397,7 +1562,7 @@ jumpButton.addEventListener(
 
 
 /* =========================================
-   HERZCHEN ERZEUGEN
+   HERZEN ERZEUGEN
    ========================================= */
 
 function createObstacle() {
@@ -1413,7 +1578,9 @@ function createObstacle() {
 
 
     const obstacle =
-        document.createElement("img");
+        document.createElement(
+            "img"
+        );
 
 
     obstacle.src =
@@ -1433,9 +1600,15 @@ function createObstacle() {
     );
 
 
+    /*
+    Wenn das Herz rechts
+    aus dem Bildschirm fliegt:
+    Punkt bekommen.
+    */
+
     obstacle.addEventListener(
         "animationend",
-        () => {
+        function() {
 
 
             if (
@@ -1462,11 +1635,15 @@ function createObstacle() {
 
 
     /*
-    Herzen werden schneller
+    Herzen werden schneller.
     */
 
     obstacleSpeed -= 0.08;
 
+
+    /*
+    Maximale Geschwindigkeit.
+    */
 
     if (
         obstacleSpeed < 0.75
@@ -1476,6 +1653,11 @@ function createObstacle() {
 
     }
 
+
+    /*
+    Abstand zwischen den Herzen
+    wird ebenfalls kleiner.
+    */
 
     const nextTime =
         Math.max(
@@ -1521,7 +1703,7 @@ function checkCollision() {
 
 
     obstacles.forEach(
-        obstacle => {
+        function(obstacle) {
 
 
             const obstacleRect =
@@ -1571,7 +1753,9 @@ function checkCollision() {
 function updateScore() {
 
     document
-        .getElementById("score")
+        .getElementById(
+            "score"
+        )
         .innerHTML =
 
         "Herzen übersprungen: " +
@@ -1610,7 +1794,9 @@ function gameOverFunction() {
 
 
     document
-        .getElementById("finalScore")
+        .getElementById(
+            "finalScore"
+        )
         .innerHTML =
 
         "Du hast " +
@@ -1632,7 +1818,7 @@ function restartGame() {
 
 
     /*
-    Alles stoppen
+    ALLE Timer stoppen.
     */
 
     clearTimeout(
@@ -1645,11 +1831,13 @@ function restartGame() {
 
 
     /*
-    Alte Hindernisse entfernen
+    Alte Hindernisse löschen.
     */
 
     document
-        .querySelectorAll(".obstacle")
+        .querySelectorAll(
+            ".obstacle"
+        )
         .forEach(
             obstacle =>
                 obstacle.remove()
@@ -1657,7 +1845,7 @@ function restartGame() {
 
 
     /*
-    Werte zurücksetzen
+    Werte komplett zurücksetzen.
     */
 
     score = 0;
@@ -1671,7 +1859,7 @@ function restartGame() {
 
 
     /*
-    Game Over ausblenden
+    Game Over schließen.
     */
 
     gameOver.style.display =
@@ -1679,14 +1867,22 @@ function restartGame() {
 
 
     /*
-    Spiel starten
+    Spiel wieder aktivieren.
     */
 
     gameRunning = true;
 
 
+    /*
+    Neues Herz starten.
+    */
+
     createObstacle();
 
+
+    /*
+    Kollisionsprüfung neu starten.
+    */
 
     collisionTimer =
         setInterval(
@@ -1716,7 +1912,7 @@ restart.addEventListener(
 
 
 /* =========================================
-   PC STEUERUNG
+   PC TASTATUR
    ========================================= */
 
 document.addEventListener(
@@ -1735,11 +1931,13 @@ document.addEventListener(
 
         if (
 
-            event.code === "Space"
+            event.code ===
+            "Space"
 
             ||
 
-            event.code === "ArrowUp"
+            event.code ===
+            "ArrowUp"
 
         ) {
 
@@ -1758,4 +1956,3 @@ document.addEventListener(
 </body>
 
 </html>
-
